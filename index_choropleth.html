@@ -31,6 +31,9 @@ div.tooltip {
 	opacity: 0.9; 
 	position: absolute;
 }
+h6 {
+	font-size: .5em;
+}
 .ui {
 	top: 10px;
 	left: 50px;
@@ -39,7 +42,7 @@ div.tooltip {
 	background-color: #fff;
 	border: 2px solid #707070;
 	border-radius: 7px;
-	width: 300px;
+	width: 350px;
 }
 .boilers {
 	fill: #FF5500;
@@ -56,6 +59,28 @@ div.tooltip {
 .other {
 	fill: #e5e7ea;
 	fill-opacity: .5;	
+}
+.info {
+	padding: 6px 8px;
+	<!-- font: 14px/16px Arial, Helvetica, sans-serif; -->
+	background: white;
+	background: rgba(255,255,255,0.8);
+	box-shadow: 0 0 25px rgba(0,0,0,0.2);
+	border-radius: 5px;
+}
+.legend {
+	line-height: 34px;
+	color: #000000;
+	font-weight: bold;
+	top: 90px;
+	left: 45px;
+}
+.legend i {
+	width: 34px;
+	height: 34px;
+	float: left;
+	margin-right: 8px;
+	opacity: 0.7;
 }
 
 </style>
@@ -81,7 +106,7 @@ div.tooltip {
 				  <span style="display:inline-block; background-color:#bcb92f; padding:0px; margin:0px; height:13px; width:13px; overflow:hidden"><input type="radio" style="opacity:0.50;padding:0px;margin:0px" name="vio" value="elev" id="elev" /></span>
 					<label for="elev"></label><span class="en">Elevators</span>
 				  <br/>
-				  
+				  <h6><i>The choropleth map represent violation rates (the number of violations per number of devices) by Community District. Construction violation rates are calculated by number of violations per number of active permits (NB,A1,A2,A3,DM).</i></h6>
 				  <!-- <span style="display:inline-block; background-color:#e5e7ea; padding:0px; margin:0px; height:13px; width:13px; overflow:hidden"><input type="checkbox" style="opacity:0.50;padding:0px;margin:0px" name="vio" class="regular-checkbox" value="other" id="other" /></span> -->
 					<!-- <label for="other"></label><span class="en">Other</span> -->
 				  <!-- <br/>			 -->
@@ -246,7 +271,43 @@ function onEachFeature(feature, layer){
 
 //var dm = new L.geoJson.ajax(("data/CD_DecDeg.json"), {style: style, onEachFeature: onEachFeature}).addTo(map);
 var boilerCD = new L.geoJson.ajax(("data/CD_DecDeg.json"), {style: style, className: "boilerCD", onEachFeature: onEachFeature}).addTo(map);	
+/*
+drawLegend();
+	function drawLegend(){
+		function getLegendColor(d) {
+			return d > 1500 ? '#457571' :
+				   d > 1000 ? '#668C81' :
+				   d > 500  ? '#8BA692' :
+				   d > 200  ? '#B1BFA3' :
+				   d > 100  ? '#DBDBB6' :
+				   d > 50   ? '#BFAD91' :
+				   d > 20   ? '#A3816F' :
+				   d > 10   ? '#875A50' :
+							   '#6E3936';
+		}
+		var info = L.control();
+		info.onAdd = function(map) {
+			this._div = L.DomUtil.create('div', 'info');
+			return this._div;
+		};
+		info.addTo(map);
 
+		var legend = L.control({position: 'topleft'});
+		legend.onAdd = function (map) {
+			var div = L.DomUtil.create('div', 'info legend'),
+				grades = [0, 10, 20, 50, 100, 200, 500, 1000, 1500],
+				labels = ["HIGH","","","","","","","","LOW"]; 
+			for (var i = 0; i < grades.length; i++) {
+				div.innerHTML +=
+					'<i style="background:' + getLegendColor(grades[i] + 1) + '"></i> ' +
+					labels[i] + '<br>';					
+			}
+			return div;
+		};
+		legend.addTo(map);
+		legend.removeFrom(map);
+	}
+	*/
 }
 
 function loadConstruction(){	
