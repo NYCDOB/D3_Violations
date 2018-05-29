@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>DOB Violations Issued 2017</title>
+
+<style type="text/css">
+html { 
+	height: 100% 
+}
+body { 
+	height: 100%; 
+	margin: 0; 
+	padding: 0;
+	font-size: 12px;
+	font-family: Arial, Helvetica, sans-serif;	
+}
+#map {
+	position: absolute;
+	height: 100%;
+	width: 100%;
+	background-color: #333;
+	pointer-events: all;
+}
+div.tooltip {
+	color: #222;
+	background: #fff;
+	padding: .5em;
+	text-shadow: #f5f5f5 0 1px 0;
+	border-radius: 7px; 
+	box-shadow: 0px 0px 2px 0px #a6a6a6; 
+	opacity: 0.9; 
+	position: absolute;
+	visibility: hidden;
+}
+.ui {
+	top: 10px;
+	left: 50px;
+	padding: 8px;
+	position: absolute;
+	background-color: #fff;
+	border: 2px solid #707070;
+	border-radius: 7px;
+	width: 425px;
+}
+.cycle7A {
+	fill: #0192A6;
+	fill-opacity: .5;
+}
+.cycle7B {
+	fill: #DA8400;
+	fill-opacity: .5;
+}
+.cycle7C {
+	fill: #AB3628;
+	fill-opacity: .5;
+}
+.other {
+	fill: #e5e7ea;
+	fill-opacity: .5;	
+}
+</style>
+    <link href='https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.css'
+    	rel='stylesheet' type='text/css'/>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+
+</head>
+<body>
+	<div id="map">
+		<div id="ui-container" class="ui" style="z-index: 401">		
+			      <h4>Active DOB Facade Violations</h4>
+				  <h5><i>Violation Type: NO REPORT AND/OR LATE FILING (FACADE)</i></h5>
+				  <h5>Cycle</h5>
+				  
+				  <span style="display:inline-block; background-color:#0192A6; padding:0px; margin:0px; height:13px; width:13px; overflow:hidden"><input type="checkbox" style="opacity:0.50;padding:0px;margin:0px" name="vio" class="regular-checkbox" value="cyc7A" id="cyc7A" checked="true"/></span>
+					<label for="cyc7A"></label><span class="en">7A</span>
+				  <br/>
+				  
+				  <span style="display:inline-block; background-color:#DA8400; padding:0px; margin:0px; height:13px; width:13px; overflow:hidden"><input type="checkbox" style="opacity:0.50;padding:0px;margin:0px" name="vio" class="regular-checkbox" value="cyc7B" id="cyc7B" /></span>
+					<label for="cyc7B"></label><span class="en">7B</span>
+				  <br/>
+				  
+				  <span style="display:inline-block; background-color:#AB3628; padding:0px; margin:0px; height:13px; width:13px; overflow:hidden"><input type="checkbox" style="opacity:0.50;padding:0px;margin:0px" name="vio" class="regular-checkbox" value="cyc7C" id="cyc7C" /></span>
+					<label for="cyc7C"></label><span class="en">7C</span>
+				  <br/>
+		
+		</div>
+	</div>
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.4.9/d3.min.js"></script>
+<script src="Leaflet.D3SvgOverlay-master/L.D3SvgOverlay.min.js"></script>
+<script src="jquery-2.1.1.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<script>
+
+
+
+ 
+<!-- var	streets = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/terrain/{z}/{x}/{y}.png', {attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'});  -->
+	<!-- grayscale = L.tileLayer("http://{s}.sm.mapstack.stamen.com/(toner-lite,$fff[difference],$fff[@23],$fff[hsl-saturation@20])/{z}/{x}/{y}.png", {attribution: '© <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'}); -->
+<!-- var map = L.map('map', { -->
+	<!-- center: [40.734063, -73.958424], -->
+	<!-- zoom: 11, -->
+	<!-- layers: [grayscale, streets] -->
+<!-- }); -->
+<!-- var baseMaps = { -->
+	<!-- "Streets": streets, -->
+	<!-- "Grayscale": grayscale -->
+<!-- }; -->
+<!-- L.control.layers(baseMaps).addTo(map); -->
+
+//var map = L.map('map').setView([40.757923, -73.957235], 13);
+//L.tileLayer("http://{s}.sm.mapstack.stamen.com/(toner-lite,$fff[difference],$fff[@23],$fff[hsl-saturation@20])/{z}/{x}/{y}.png", {attribution: '© <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'}).addTo(map);
+
+var grayscale = L.tileLayer("http://{s}.sm.mapstack.stamen.com/(toner-lite,$fff[difference],$fff[@23],$fff[hsl-saturation@20])/{z}/{x}/{y}.png", {attribution: '© <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'});
+	streets = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/terrain/{z}/{x}/{y}.png', {attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'}); 
+var map = L.map('map', {
+	center: [40.734063, -73.958424],
+	zoom: 11,
+	layers: [grayscale, streets]
+});
+var baseMaps = {
+	"Grayscale": grayscale,
+	"Streets": streets
+};
+L.control.layers(baseMaps).addTo(map);
+
+var tooltip = d3.select('body').append('div')
+	.attr('class', 'tooltip');
+	
+var width = $("#map").width(),
+	height = $("#map").height();
+
+
+function init(){	
+	var points = [];
+	var pointsOverlay = L.d3SvgOverlay(function(sel,proj){
+		
+	var pointsUpd = sel.selectAll('circle').data(points);
+
+	pointsUpd.enter()
+		.append('circle')
+		.attr('cx',function(d){return proj.latLngToLayerPoint(d.latLng).x;})
+		.attr('cy',function(d){return proj.latLngToLayerPoint(d.latLng).y;})
+		.attr('class', function(d){
+			if (d.cycle == "7A"){
+				return "cycle7A";
+			} else if (d.cycle == "7B"){
+				return "cycle7B";
+			} else if (d.cycle == "7C"){
+				return "cycle7C";
+			} 
+				//return "other";
+		})
+		.on('click', function(d){
+			tooltip.style("visibility", "visible");
+			tooltip.html(
+				'BIN: ' + d.bin + '</br>' +								
+				'ADDRESS: '+ d.HouseNum + ' ' + d.StreetName + ', ' + (d.Borough).toUpperCase() + '</br>' +
+				'COMMUNITY DISTRICT: ' + d.CD + '</br>' +
+				'DEVICE NUMBER: '+ d.deviceNum + '</br>' +
+				'VIOLATION NUMBER: ' + d.vioNum + '</br>' +
+				'ISSUE DATE: ' + d.issDate + '</br>' +
+				'CYCLE: ' + d.cycle
+			)
+			if (d3.event.pageX > (width - 200)) {
+			   tooltip.style("left", (d3.event.pageX - 350) + "px");
+			} else {
+			   tooltip.style("left", (d3.event.pageX + 20) + "px")
+					.style("top", (d3.event.pageY -30) + "px");
+			}
+			if (d3.event.pageY > (height - 150)) {
+			   tooltip.style("top", (d3.event.pageY -100) + "px");
+			} else {
+			   tooltip.style("top", (d3.event.pageY -30) + "px");
+			}				
+		})
+		.on("mousemove", function(d){
+			$(this).attr("style", "cursor: pointer; fill: #eef442; fill-opacity: 1;");
+		})
+
+		.on("mouseout", function(){
+			$(this).attr("style", "stroke-width: 0px; fill-opacity: .5;");
+			return tooltip.style("visibility", "hidden");
+		});
+
+		pointsUpd.attr('r', 3 / proj.scale);
+	});
+	
+
+	d3.csv("data/Facade_DOB_ViolationsNRF_Cycle7_LatLong.csv",function(data){
+				points = data.map(function(d){
+				d.latLng = [+d.Lat,+d.Long];
+				d.bin = [d.BIN];				
+				d.HouseNum = [d.HouseNum];
+				d.StreetName = [d.StreetName];
+				d.borough = [d.Borough];
+				d.deviceNum = [d.DeviceNumber];
+				d.CD = [d.BoroCD];
+				d.vioNum = [d.ViolationNumber];
+				d.issDate = [d.IssueDate];
+				d.cycle = [d.Cycle];
+			return d;
+			});
+		pointsOverlay.addTo(map);
+		d3.selectAll(".cycle7B").style("display", "none");
+		d3.selectAll(".cycle7C").style("display", "none");
+		//d3.selectAll(".other").style("display", "none");
+	});
+	
+
+}
+
+var cyc7ACheckbox = document.querySelector('input[id="cyc7A"]');
+	cyc7BCheckbox = document.querySelector('input[id="cyc7B"]');
+	cyc7CCheckbox = document.querySelector('input[id="cyc7C"]');
+	//otherCheckbox = document.querySelector('input[id="other"]');
+
+cyc7ACheckbox.onchange = function(){
+		if(this.checked){
+			d3.selectAll(".cycle7A").filter(function(d) {
+				return d.cycle == "7A";
+			})
+			.style("display", "block");	
+
+		} else {
+			d3.selectAll(".cycle7A").filter(function(d) {
+				return d.cycle == "7A";
+			})
+			.style("display", "none");
+						
+		}
+};	
+cyc7BCheckbox.onchange = function(){
+		if(this.checked){
+			d3.selectAll(".cycle7B").filter(function(d) {
+				return d.cycle == "7B";
+			})
+			.style("display", "block");	
+
+		} else {
+			d3.selectAll(".cycle7B").filter(function(d) {
+				return d.cycle == "7B";
+			})
+			.style("display", "none");
+						
+		}
+};
+cyc7CCheckbox.onchange = function(){
+		if(this.checked){
+			d3.selectAll(".cycle7C").filter(function(d) {
+				return d.cycle == "7C";
+			})
+			.style("display", "block");	
+
+		} else {
+			d3.selectAll(".cycle7C").filter(function(d) {
+				return d.cycle == "7C";
+			})
+			.style("display", "none");
+						
+		}
+};
+<!-- otherCheckbox.onchange = function(){ -->
+		<!-- if(this.checked){ -->
+			<!-- d3.selectAll(".other").filter(function(d) { -->
+				<!-- return d.VioCat == "Other"; -->
+			<!-- }) -->
+			<!-- .style("display", "block");	 -->
+
+		<!-- } else { -->
+			<!-- d3.selectAll(".other").filter(function(d) { -->
+				<!-- return d.VioCat == "Other"; -->
+			<!-- }) -->
+			<!-- .style("display", "none"); -->
+						
+		<!-- } -->
+<!-- }; -->
+
+init();
+
+</script>
+    
+</body>
+</html>
