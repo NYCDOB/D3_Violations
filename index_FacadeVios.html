@@ -44,19 +44,19 @@ div.tooltip {
 }
 .cycle7A {
 	fill: #0192A6;
-	fill-opacity: .5;
+	fill-opacity: .6;
 }
 .cycle7B {
 	fill: #DA8400;
-	fill-opacity: .5;
+	fill-opacity: .6;
 }
 .cycle7C {
 	fill: #AB3628;
-	fill-opacity: .5;
+	fill-opacity: .6;
 }
-.other {
-	fill: #e5e7ea;
-	fill-opacity: .5;	
+.cycle8A {
+	fill: #6809c1;
+	fill-opacity: .6;	
 }
 </style>
     <link href='https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.css'
@@ -81,6 +81,10 @@ div.tooltip {
 				  
 				  <span style="display:inline-block; background-color:#AB3628; padding:0px; margin:0px; height:13px; width:13px; overflow:hidden"><input type="checkbox" style="opacity:0.50;padding:0px;margin:0px" name="vio" class="regular-checkbox" value="cyc7C" id="cyc7C" /></span>
 					<label for="cyc7C"></label><span class="en">7C</span>
+				  <br/>
+				  
+				  <span style="display:inline-block; background-color:#6809c1; padding:0px; margin:0px; height:13px; width:13px; overflow:hidden"><input type="checkbox" style="opacity:0.50;padding:0px;margin:0px" name="vio" class="regular-checkbox" value="cyc8A" id="cyc8A" /></span>
+					<label for="cyc8A"></label><span class="en">8A</span>
 				  <br/>
 		
 		</div>
@@ -117,8 +121,9 @@ div.tooltip {
 var grayscale = L.tileLayer("http://{s}.sm.mapstack.stamen.com/(toner-lite,$fff[difference],$fff[@23],$fff[hsl-saturation@20])/{z}/{x}/{y}.png", {attribution: '© <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'});
 	streets = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/terrain/{z}/{x}/{y}.png', {attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'}); 
 var map = L.map('map', {
-	center: [40.734063, -73.958424],
-	zoom: 11,
+	//center: [40.734063, -73.958424],
+	center: [40.749433, -73.961643],
+	zoom: 13,
 	layers: [grayscale, streets]
 });
 var baseMaps = {
@@ -151,8 +156,10 @@ function init(){
 				return "cycle7B";
 			} else if (d.cycle == "7C"){
 				return "cycle7C";
-			} 
-				//return "other";
+			} else if (d.cycle == "8A"){
+				return "cycle8A";
+			}			
+				
 		})
 		.on('click', function(d){
 			tooltip.style("visibility", "visible");
@@ -190,7 +197,7 @@ function init(){
 	});
 	
 
-	d3.csv("data/Facade_DOB_ViolationsNRF_Cycle7_LatLong.csv",function(data){
+	d3.csv("data/Facade_DOB_ViolationsNRF_Cycle7_8A.csv",function(data){
 				points = data.map(function(d){
 				d.latLng = [+d.Lat,+d.Long];
 				d.bin = [d.BIN];				
@@ -207,7 +214,7 @@ function init(){
 		pointsOverlay.addTo(map);
 		d3.selectAll(".cycle7B").style("display", "none");
 		d3.selectAll(".cycle7C").style("display", "none");
-		//d3.selectAll(".other").style("display", "none");
+		d3.selectAll(".cycle8A").style("display", "none");
 	});
 	
 
@@ -216,7 +223,7 @@ function init(){
 var cyc7ACheckbox = document.querySelector('input[id="cyc7A"]');
 	cyc7BCheckbox = document.querySelector('input[id="cyc7B"]');
 	cyc7CCheckbox = document.querySelector('input[id="cyc7C"]');
-	//otherCheckbox = document.querySelector('input[id="other"]');
+	cyc8ACheckbox = document.querySelector('input[id="cyc8A"]');
 
 cyc7ACheckbox.onchange = function(){
 		if(this.checked){
@@ -263,21 +270,21 @@ cyc7CCheckbox.onchange = function(){
 						
 		}
 };
-<!-- otherCheckbox.onchange = function(){ -->
-		<!-- if(this.checked){ -->
-			<!-- d3.selectAll(".other").filter(function(d) { -->
-				<!-- return d.VioCat == "Other"; -->
-			<!-- }) -->
-			<!-- .style("display", "block");	 -->
+cyc8ACheckbox.onchange = function(){
+		if(this.checked){
+			d3.selectAll(".cycle8A").filter(function(d) {
+				return d.cycle == "8A";
+			})
+			.style("display", "block");	
 
-		<!-- } else { -->
-			<!-- d3.selectAll(".other").filter(function(d) { -->
-				<!-- return d.VioCat == "Other"; -->
-			<!-- }) -->
-			<!-- .style("display", "none"); -->
+		} else {
+			d3.selectAll(".cycle8A").filter(function(d) {
+				return d.cycle == "8A";
+			})
+			.style("display", "none");
 						
-		<!-- } -->
-<!-- }; -->
+		}
+};
 
 init();
 
