@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>DOB Enforcement Map</title>
+    <title>DOB Violations Issued 2017</title>
 
 <style type="text/css">
 html { 
@@ -84,7 +84,27 @@ h6 {
 	margin-right: 8px;
 	opacity: 0.7;
 }
+.logo{
+	background-image: url('https://nycdob.github.io/EssentialActiveConstruction/images/dob_logo_white.png');
+	background-repeat: no-repeat;
+	background-position: center;
+	float: right;
+	background-size: 70px;
+	height: 50px;
+	width: 70px;	
+}
+@media( max-width:1200px){
+	.dobmain	{
+		padding-top:50px;
+	}
+	.ui{
+		visibility:hidden;
+	}
 
+}
+.row{
+	padding-top: 50px;
+}
 </style>
     <link href='https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.css'
     	rel='stylesheet' type='text/css'/>
@@ -92,34 +112,47 @@ h6 {
 
 </head>
 <body>
-	<div id="map">
-		<div id="ui-container" class="ui" style="z-index: 401">		
-			      <h4>DOB Enforcement Map</h4>
-				  <h5>Violation Type</h5>
-				  
-				  <span style="display:inline-block; background-color:#FF5500; padding:0px; margin:0px; height:13px; width:13px; overflow:hidden"><input type="radio" style="opacity:0.50;padding:0px;margin:0px" name="vio" class="selected boiler" value="boiler" id="boiler" checked="true"/></span>
-					<label for="boiler"></label><span class="en">Boilers</span>
-				  <br/>
-				  
-				  <span style="display:inline-block; background-color:#42d4f4; padding:0px; margin:0px; height:13px; width:13px; overflow:hidden"><input type="radio" style="opacity:0.50;padding:0px;margin:0px" name="vio" value="constr" id="constr" /></span>
-					<label for="const"></label><span class="en">Construction</span>
-				  <br/>
-				  
-				  <span style="display:inline-block; background-color:#bcb92f; padding:0px; margin:0px; height:13px; width:13px; overflow:hidden"><input type="radio" style="opacity:0.50;padding:0px;margin:0px" name="vio" value="elev" id="elev" /></span>
-					<label for="elev"></label><span class="en">Elevators</span>
-				  <br/>
-				  <span style="display:inline-block; background-color:#8DB5AF; padding:0px; margin:0px; height:13px; width:13px; overflow:hidden"><input type="radio" style="opacity:0.50;padding:0px;margin:0px" name="vio" value="fac" id="fac" /></span>
-					<label for="fac"></label><span class="en">Facades</span>
-				  <br/>
-				  <!-- <h6><i>The choropleth map represent violation rates (the number of violations per number of devices) by Community District. Construction violation rates are calculated by number of violations per number of active permits (NB,A1,A2,A3,DM). Facade violation rates are calculated by number of violations per number of Local Law 11 buildings.</i></h6> -->
-				  <!-- <h6><i>The map represent violation rates (the number of violations per number of devices) by Community District. Zoom in to view the location of individual violations. Construction violations include but are not limited to Stop Work Orders, Vacate Orders, etc. Construction violation rates are calculated by number of violations per number of active permits (NB,A1,A2,A3,DM). Facade violation rates are calculated by number of violations per number of Local Law 11 buildings.</i></h6> -->
-				  <h6><i>The map represent violation rates (the number of violations dispositioned in 2017 per number of devices) by Community District. Zoom in to view the location of individual violations.</i></h6>
-				  <!-- <br/> -->
-				 <i><font size=2px color="#7f8287"><span id="txt1">Boiler violations include but are not limited to Failure to File Annual Boiler Inspection Report, etc. Boiler violation rates are calculated by number of violations per number of boiler units.</span></font></i><br/> 
+<div class="container">
+			<div class="navbar navbar-fixed-top" role="navigation" style="color:white;background-color:RGB(40,56,124);">
+			<a class="logo" href="https://www1.nyc.gov/site/buildings/index.page" target="_blank"> </a>
+				<div class="nav navbar-nav" style="margin-left:15px;margin-top: 5px;font-size:28px;font-weight:bold;text-align:center;">
+					DOB Violations Issued 2017
+				</div>
+			</div>
+</div>
+<div class="container-fluid dobmain" style="margin-top:20px">
+	<div class="row" style="margin-right:20px">
+		<div class="col-lg-12" style="height:89vh">
+			<div id="map">
+				<div id="ui-container" class="ui" style="z-index: 401;" >		
+						  <!-- <h4>DOB Enforcement Map</h4> -->
+						  <h5>Violation Type</h5>
+						  
+						  <span style="display:inline-block; background-color:#FF5500; padding:0px; margin:0px; height:13px; width:13px; overflow:hidden"><input type="radio" style="opacity:0.50;padding:0px;margin:0px" name="vio" class="selected boiler" value="boiler" id="boiler" checked="true"/></span>
+							<label for="boiler"></label><span class="en">Boilers</span>
+						  <br/>
+						  
+						  <span style="display:inline-block; background-color:#42d4f4; padding:0px; margin:0px; height:13px; width:13px; overflow:hidden"><input type="radio" style="opacity:0.50;padding:0px;margin:0px" name="vio" value="constr" id="constr" /></span>
+							<label for="const"></label><span class="en">Construction</span>
+						  <br/>
+						  
+						  <span style="display:inline-block; background-color:#bcb92f; padding:0px; margin:0px; height:13px; width:13px; overflow:hidden"><input type="radio" style="opacity:0.50;padding:0px;margin:0px" name="vio" value="elev" id="elev" /></span>
+							<label for="elev"></label><span class="en">Elevators</span>
+						  <br/>
+						  <span style="display:inline-block; background-color:#8DB5AF; padding:0px; margin:0px; height:13px; width:13px; overflow:hidden"><input type="radio" style="opacity:0.50;padding:0px;margin:0px" name="vio" value="fac" id="fac" /></span>
+							<label for="fac"></label><span class="en">Facades</span>
+						  <br/>
+						  <!-- <h6><i>The choropleth map represent violation rates (the number of violations per number of devices) by Community District. Construction violation rates are calculated by number of violations per number of active permits (NB,A1,A2,A3,DM). Facade violation rates are calculated by number of violations per number of Local Law 11 buildings.</i></h6> -->
+						  <!-- <h6><i>The map represent violation rates (the number of violations per number of devices) by Community District. Zoom in to view the location of individual violations. Construction violations include but are not limited to Stop Work Orders, Vacate Orders, etc. Construction violation rates are calculated by number of violations per number of active permits (NB,A1,A2,A3,DM). Facade violation rates are calculated by number of violations per number of Local Law 11 buildings.</i></h6> -->
+						  <h6><i>The map represent violation rates (the number of active violations issued in 2017 per number of devices) by Community District. Zoom in to view the location of individual violations.</i></h6>
+						  <!-- <br/> -->
+						 <i><font size=2px color="#7f8287"><span id="txt1">Boiler violations include but are not limited to Failure to File Annual Boiler Inspection Report, etc. Boiler violation rates are calculated by number of violations per number of boiler units.</span></font></i><br/> 
 
+				</div>
+			</div>
 		</div>
 	</div>
-    
+</div>    
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.4.9/d3.min.js"></script>
 <script src="Leaflet.D3SvgOverlay-master/L.D3SvgOverlay.min.js"></script>
